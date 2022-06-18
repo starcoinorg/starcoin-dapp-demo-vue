@@ -1,6 +1,12 @@
 <template>
   <div class="token">
     <div class="container">
+      <el-button type="primary" :disabled="isStarMaskInstalled">{{
+        isStarMaskInstalled ? "插件已下载" : "下载钱包插件"
+      }}</el-button>
+      <el-button type="primary" :disabled="isStarMaskConnected">{{
+        isStarMaskConnected ? "钱包已连接" : "链接钱包插件"
+      }}</el-button>
       <el-button type="primary" @click="dialogFormVisible = true"
         >发行 Token</el-button
       >
@@ -38,6 +44,7 @@
 
 <script>
 import axios from "axios";
+import StarMaskOnboarding from "@starcoin/starmask-onboarding";
 export default {
   name: "TokenList",
   data() {
@@ -46,6 +53,8 @@ export default {
       dialogFormVisible: false,
       formLabelWidth: "100px",
       form: {},
+      isStarMaskInstalled: false,
+      isStarMaskConnected: false,
     };
   },
   async created() {
@@ -57,6 +66,29 @@ export default {
       item.volume_str = item.volume_str ? item.volume_str : "0";
       return item;
     });
+  },
+  mounted() {
+    this.pageInit();
+  },
+  methods: {
+    pageInit() {
+      // 获取当前浏览器地址
+      const currentUrl = new URL(window.location.href);
+      // 判断当前地址
+      const forwarderOrigin =
+        currentUrl.hostname === "localhost"
+          ? "http://localhost:8080"
+          : undefined;
+      // 浏览器钱包插件是否安装
+      this.isStarMaskInstalled = StarMaskOnboarding.isStarMaskInstalled();
+      // 是否已经与钱包连接
+      this.isStarMaskConnected = false;
+      console.log(
+        this.isStarMaskInstalled,
+        this.isStarMaskConnected,
+        forwarderOrigin
+      );
+    },
   },
 };
 </script>
