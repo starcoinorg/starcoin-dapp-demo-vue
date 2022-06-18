@@ -1,29 +1,37 @@
 <template>
   <div class="layout">
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside width="200px"><AsideView /></el-aside>
       <el-container>
-        <el-header>Header</el-header>
-        <el-main><router-view></router-view></el-main>
+        <el-header><HeaderView /></el-header>
+        <el-main><MainView /></el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script>
+import AsideView from "@/Layout/components/AsideView.vue";
+import HeaderView from "@/Layout/components/HeaderView.vue";
+import MainView from "@/Layout/components/MainView.vue";
 export default {
   name: "Layout",
+  components: {
+    AsideView,
+    HeaderView,
+    MainView,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .el-aside {
   height: 100vh;
-  background-color: #d3dce6;
+  background-color: #fff;
 }
 
 .el-header {
-  background-color: #b3c0d1;
+  background-color: #272727;
   color: #333;
 }
 

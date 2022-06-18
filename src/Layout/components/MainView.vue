@@ -1,10 +1,10 @@
 <template>
-  <div class="header"></div>
+  <div class="main"><router-view></router-view></div>
 </template>
 
 <script>
 export default {
-  name: "header",
+  name: "main",
 };
 </script>
 
