@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "AsideHome",
+  name: "AsideView",
   data() {
     return {
       defaultActive: "/token",
